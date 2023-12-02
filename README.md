@@ -40,14 +40,17 @@
     ```
     make install
     ```
+
     Установка dev зависимостей
     ```
     make install_dev
     ```
+
     Линтеры
     ```
     make lint
     ```
+    
     Проверки перед commit push
     ```
     make pre_push_test
