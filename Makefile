@@ -1,25 +1,28 @@
+#!/bin/bash
 include configs/.env.config
 
 .PHONY: lint
 lint:
 	flake8 src/
 
-train:
-	apt-get update && apt-get upgrade && apt-get install unzip git
-	mkdir datasets && cd datasets
-	wget https://clck.ru/36tgHp -O data_segmentation.zip
-	unzip data_segmentation.zip
-	cd ..
-	git clone https://github.com/ultralytics/yolov5 --branch v7.0
-	python3 -m venv ./venv
-	source venv/bin/activate
-	pip3 install -r requirements/requirements.txt
-	python3 prepare_data.py
+prepare:
+	apt-get update && apt-get --yes install unzip git g++ libgl1
+	mkdir datasets && \
+	cd datasets && \
+	wget https://clck.ru/36tgHp -O data_segmentation.zip && \
+	unzip data_segmentation.zip && \
+	rm data_segmentation.zip && \
+	cd .. && \
+	git clone https://github.com/ultralytics/yolov5 --branch v7.0 && \
+	python3 -m venv ./venv && \
+	. venv/bin/activate && \
+	pip3 install -r requirements/requirements.txt && \
+	pip3 install --upgrade --force-reinstall Pillow==9.5.0 && \
+	python3 prepare_data.py && \
 	cp barcodes.yaml yolov5/data/barcodes.yaml
-	cd yolov5 && run
 
 run:
-	cd yolov5
+	cd yolov5 && \
 	python train.py --weights $(weights) \
 					--cfg $(cfg) \
 					--data $(data) \
@@ -31,7 +34,7 @@ run:
 					--optimizer $(optimizer) \
 					--project $(project) \
 					--name $(name) \
-					--cos-lr $(cos-lr)
+					--cos-lr
 
 .PHONY: install
 install:

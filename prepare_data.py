@@ -4,7 +4,7 @@ import shutil
 import os
 import cv2
 
-DATA_PATH = 'datasets'
+DATA_PATH = './datasets/data'
 
 df = pd.read_table(os.path.join(DATA_PATH, 'annotations.tsv'))
 x = df['filename'].to_numpy()

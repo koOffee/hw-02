@@ -1,5 +1,5 @@
 
-path: ../datasets/barcodes  # dataset root dir
+path: ../datasets/data/barcodes  # dataset root dir
 train: images/train  # train images
 val: images/val  # val images
 test:  # test images (optional)
