@@ -1,0 +1,8 @@
+
+path: ../datasets/barcodes  # dataset root dir
+train: images/train  # train images
+val: images/val  # val images
+test:  # test images (optional)
+
+names:
+  0: barcode

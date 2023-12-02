@@ -1,0 +1,51 @@
+.ipynb_checkpoints
+__pycache__
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+/datasets
+/yolov5
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+
+# Covers JetBrains IDEs: PyCharm
+.idea/
+
+# VSCode
+*.code-workspace
+.vscode/
+
+# testing
+
+*.coverage
+htmlcov
+*.pytest_cache
+
+*.pt
+.dvc/tmp/
+.dvc/cache
