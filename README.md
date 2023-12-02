@@ -5,57 +5,59 @@
 Размеченная доступная выборка содержит 481 изображение с различными разрешениями
 Посмотреть датасет можно [здесь](https://disk.yandex.ru/d/pRFNuxLQUZcDDg).
 
-Посмотреть что там внутри можно в [тетрадке](notebooks/DataExplore.ipynb).
-### Подготовка пайплайна
+### Пайплайн для запуска обучения
 
-1. Создание и активация окружения
+1. Подготовка данных, окружения, установка зависимостей
     ```
-    python3 -m venv /path/to/new/virtual/environment
-    ```
-    ```
-    source /path/to/new/virtual/environment/bin/activate
+    make prepare
     ```
 
-2. Основные рецепты
+2. Добавление ключей clearml:
+    ```
+    clearml-init
+    ```
+
+3. Настройка конфига
+    Основной конфиг лежит [здесь](configs/.env.config).
+    Если требуется более тонкая настройка, обратите внимание [сюда](yolov5/data/hyps/)
+    По-умолчанию подтягивается "hyp.scratch-low.yaml". Можно выбрать из имеющихся
+    или написать самому. После чего не забыть указать его в [.env.config](configs/.env.config)
+
+4. Запуск обучения:
+    ```
+    make run
+    ```
+5. Посмотреть бенчмарки на своих девайсах
+    ```
+    make benchamrk_gpu
+    ```
+    ```
+    make benchamrk_cpu
+    ```
+### Другие рецепты
 
     Установка зависимостей:
     ```
     make install
     ```
-   Установка dev зависимостей
-   ```
-   make install_dev
-   ```
-   Линтеры
-   ```
-   make lint
-   ```
-   Проверки перед commit push
-   ```
-   make pre_push_test
-   ```
-
-3. Настраиваем [config.yaml](configs/config.yaml) под себя.
-В `data_config.data_path`, нужно указать папку куда скачали датасет из п. Датасет.
-
-### Обучение
-
-Запуск тренировки:
-
-```
-make train
-```
+    Установка dev зависимостей
+    ```
+    make install_dev
+    ```
+    Линтеры
+    ```
+    make lint
+    ```
+    Проверки перед commit push
+    ```
+    make pre_push_test
+    ```
 
 ### Инференс
 
-Посмотреть результаты работы обученной сети можно в [тетрадке](notebooks/inference.ipynb).
+Посмотреть результаты работы обученной сети можно в 'yolov5/project/name/'.
+Здесь будут лежать веса модели, результаты инференса и графики результатов обучения.
 
 
-### TODO
-Текущий BEST - [ClearML](https://app.clear.ml/projects/95002e4a916d47e4b681cd502a639cbe/experiments/9862f8f4125647c3bc88466ebe321467/output/execution)
-
-Что ещё можно попробовать:
-
-1. Взвесить BCELoss (веса есть в файлике с DataExplore)
-2. Заменить лосс на Focall
-3. Покрутить ауги, подумать что сделать с миноритарными классами
+### Пример результатов:
+[ClearML](https://app.clear.ml/projects/a2b7fd2e7dbf441fae7cb1ce190fd982/experiments/dc798fa0453846dfad4b963ddc75e77a/output/execution)

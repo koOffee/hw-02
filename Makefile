@@ -36,6 +36,15 @@ run:
 					--name $(name) \
 					--cos-lr
 
+
+benchamrk_gpu:
+	cd yolov5 && \
+	python benchmarks.py --weights BarcodesDetection/exp0/weights/best.pt --imgsz 640 --device 0
+
+benchamrk_cpu:
+	cd yolov5 && \
+	python benchmarks.py --weights BarcodesDetection/exp0/weights/best.pt --imgsz 640
+
 .PHONY: install
 install:
 	pip install -r requirements/requirements.txt
